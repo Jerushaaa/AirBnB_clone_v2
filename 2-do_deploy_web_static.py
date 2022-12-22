@@ -1,33 +1,11 @@
 #!/usr/bin/python3
-"""
-fabric script to distribute an archive to web servers,
-using the function do_deploy
-"""
-
-from fabric.api import *
+# Fabfile to distribute an archive to a web server.
+import os.path
 from fabric.api import env
 from fabric.api import put
 from fabric.api import run
-from datetime import datetime
-from os.path import exists
-import os.path
 
-env.hosts = ['54.90.29.242', '100.26.18.26']
-env.user = "ubuntu"
-env.key_filename = "/root/.ssh/school"
-
-
-def do_pack():
-    """generates a .tgz archive from the contents of the web_static folder
-    """
-    local("sudo mkdir -p versions")
-    date = datetime.now().strftime("%Y%m%d%H%M%S")
-    filename = "versions/web_static_{}.tgz".format(date)
-    result = local("sudo tar -cvzf {} web_static".format(filename))
-    if result.succeeded:
-        return filename
-    else:
-        return "Not Deployed"
+env.hosts = ["54.90.29.242", "100.26.18.26"]
 
 
 def do_deploy(archive_path):
