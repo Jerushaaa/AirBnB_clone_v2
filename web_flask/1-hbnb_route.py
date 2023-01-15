@@ -5,9 +5,9 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=Fase)
+@app.route('/', strict_slashes=False)
 def hbnb_route():
-    """prints Hello HBNB"""l
+    """prints Hello HBNB"""
     return "Hello HBNB!"
 
 
